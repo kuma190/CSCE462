@@ -1,6 +1,5 @@
 import signal
 import sys
-import RPi.GPIO as GPIO
 from gpiozero import LED
 from time import sleep
 from multiprocessing import Process
@@ -15,8 +14,8 @@ i2c = busio.I2C(board.SCL, board.SDA)
 dac = adafruit_mcp4725.MCP4725(i2c)
 MAX_VOLTS = 3.3
 SCALE = 4095
-REST = 0.000005
-HERTZ = 15
+REST = 0.5
+HERTZ = 10
 
 morseDict = {
     'A':'.-',
@@ -117,7 +116,7 @@ def wordsToMorse(words):
     for i in range(len(wordArr)):
         word = wordArr[i]
         for char in word:
-            for d in morseDict[char]:
+            for d in morseDict[char.upper()]:
                 if d == ".":
                     dot()
                 elif d == "-":
@@ -129,4 +128,4 @@ def wordsToMorse(words):
 
 
 if __name__ == '__main__':
-    wordsToMorse('PLS HELP ME')
+    wordsToMorse("Zebras are blue")
