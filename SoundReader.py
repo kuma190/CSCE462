@@ -2,7 +2,8 @@ from scipy.io import wavfile
 import sys
 import numpy as np
 from MorseToAnalog import decode
-samplerate, data = wavfile.read('morsecode.wav')
+samplerate, data = wavfile.read('morse.wav')
+np. set_printoptions(threshold=np. inf)
 string = ''
 words = ''
 null_count = 0
@@ -27,8 +28,6 @@ for x in data:
             morse_list.append(num_count)
             num_count = 0
 
-
-print(null_list)
 dot = min(morse_list)
 dash = max(morse_list)
 for x in morse_list:
