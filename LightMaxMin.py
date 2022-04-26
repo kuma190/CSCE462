@@ -58,7 +58,7 @@ def decode(letter):
     }
     return morseDict.get(letter)
 
-def SoundAnalyze():
+def LightAnalyze():
     words = ''
     null_count = 0
     num_count = 0
@@ -128,7 +128,7 @@ def SoundAnalyze():
     print(response)
 
 def handler(signum, frame):
-    SoundAnalyze()
+    LightAnalyze()
     exit(1)
 
 signal.signal(signal.SIGINT, handler)
