@@ -65,7 +65,7 @@ def LightAnalyze():
     morse_list = []
     null_list = []
     space_list = []
-    tolerance = 15
+    tolerance = 10
     final_string = ""
 
     on = max(data)
@@ -87,21 +87,25 @@ def LightAnalyze():
     print(morse_list)
     dot = min(morse_list)
     dash = max(morse_list)
+    mean = (dot + dash)/2
     for x in morse_list:
-        if dot + tolerance > x > dot - tolerance:
+        if mean > x:
             words += '.'
-        elif dash + tolerance > x > dash - tolerance:
+        elif x > mean:
             words += '-'
     no_space = min(null_list)
     word_space = max(null_list)
-    if word_space + 3*tolerance > (3 * no_space) > word_space - 3*tolerance:
-        word_space = -100
-
+    letter_space = 3 * no_space
+    if letter_space + 3*no_space > word_space:
+        word_space = np.inf
+    noTOletter = (no_space + letter_space)/2
+    letterTOword = (word_space + letter_space)/2
+    print(noTOletter, letterTOword)
     number = 0
     for x in range(len(null_list)):
-        if no_space + tolerance > null_list[x] > no_space - tolerance:
+        if noTOletter > null_list[x]:
             space_list.append('')
-        elif word_space + tolerance > null_list[x] > word_space - tolerance:
+        elif letterTOword < null_list[x]:
             space_list.append('  ')
         else:
             space_list.append(' ')
@@ -136,7 +140,3 @@ if __name__ == "__main__":
   while True:
     v = chan0.voltage
     data.append(v)
-
-
-
-
