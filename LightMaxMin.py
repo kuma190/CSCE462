@@ -70,7 +70,7 @@ def LightAnalyze():
 
     on = max(data)
     off = min(data)
-    _tol = .1
+    _tol = (on-off)*.2
     for x in data:
         if off - _tol < x < off + _tol:
             if num_count!=0:
