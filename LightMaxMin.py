@@ -17,6 +17,7 @@ chan0 = AnalogIn(mcp, MCP.P1)
 
 np. set_printoptions(threshold=np. inf)
 data = []
+#decode function
 def decode(letter):
     morseDict = {
         '.-': 'A',
@@ -59,6 +60,7 @@ def decode(letter):
     return morseDict.get(letter)
 
 def LightAnalyze():
+    #define variables to later use
     words = ''
     null_count = 0
     num_count = 0
@@ -67,7 +69,7 @@ def LightAnalyze():
     space_list = []
     tolerance = 10
     final_string = ""
-
+    #find when sound is being produced and when it is silent (average values within a tolerance)
     on = max(data)
     off = min(data)
     _tol = .1
