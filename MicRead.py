@@ -2,7 +2,7 @@ from scipy.io import wavfile
 import sys
 import numpy as np
 from MorseToAnalog import decode
-samplerate, data = wavfile.read('output.wav')
+samplerate, data = wavfile.read('outpu.wav')
 #variables
 string = ''
 words = ''
@@ -20,13 +20,13 @@ for x in data:
     if abs(x) > 100:
         string += str(x)
         num_count += 1
-        if num_count > 1000 and null_count > 3000:
+        if num_count > 1200 and null_count > 3000:
             null_list.append(null_count)
             null_count = 0
     else:
         string+='-'
         null_count += 1
-        if null_count > 3000 and num_count > 1000:
+        if null_count > 3000 and num_count > 1200:
             morse_list.append(num_count)
             num_count = 0
 
